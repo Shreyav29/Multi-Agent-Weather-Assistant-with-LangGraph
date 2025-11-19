@@ -117,42 +117,6 @@ class WeatherState(TypedDict):
     answer: str          # Final formatted answer
 ```
 
-## 🔧 Customization
-
-### Add New Agents
-
-```python
-def custom_node(state: WeatherState) -> WeatherState:
-    # Your logic here
-    state["custom_field"] = "value"
-    return state
-
-builder.add_node("custom", custom_node)
-builder.add_edge("router", "custom")
-```
-
-### Change LLM Provider
-
-Replace Gemini calls with OpenAI, Anthropic, or any LangChain-compatible LLM:
-
-```python
-from langchain_openai import ChatOpenAI
-
-llm = ChatOpenAI(model="gpt-4")
-response = llm.invoke(prompt)
-```
-
-## 🐛 Debugging
-
-Enable detailed logging:
-
-```python
-import logging
-logging.basicConfig(level=logging.DEBUG)
-
-# Or use LangSmith for visual debugging
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-```
 
 ## 📈 Future Enhancements
 
