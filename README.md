@@ -87,21 +87,6 @@ print(result["answer"])
 ❌ "Do you like pizza?" → "I can only answer weather questions..."
 ```
 
-## 🧪 Testing
-
-Run the included test suite:
-
-```python
-test_cases = [
-    "What's the weather in Seattle right now",
-    "Tell me the weather in Hyderabad.",
-    "How's the weather today?",
-]
-
-for query in test_cases:
-    result = app.invoke({"user_input": query})
-    print(f"Q: {query}\nA: {result['answer']}\n")
-```
 
 
 ## 🛠️ Tech Stack
@@ -126,7 +111,6 @@ class WeatherState(TypedDict):
     weather_info: str    # Raw API response
     answer: str          # Final formatted answer
 ```
-
 
 ## 📈 Future Enhancements
 
