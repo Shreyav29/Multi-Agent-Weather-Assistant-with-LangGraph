@@ -30,31 +30,21 @@ graph TD
     style FinalAnswer fill:#f3e5f5
 ```
 
-The agent is implemented as a **LangGraph state machine** with the following nodes:
-
-1. `router`  
-   - Uses **Gemini** to:
-     - Decide if the query is a weather question (`is_weather`)
-     - Extract the location name (`location`)
-   - Also has a small regex fallback for cases like “weather in \<city>”.
-
-2. `call_weather_api`  
-   - Uses **Open-Meteo**:
-     - Geocoding API → location name → latitude/longitude  
-     - Forecast API → current weather at those coordinates  
-   - Writes a human-readable summary into `weather_info`.
-
-3. `final_answer`  
-   - If `weather_info` exists → sets `answer` from it  
-   - Otherwise → sets a default “I can only answer simple weather questions” message.
-
-
 ### Agent Flow
 
 1. **Router Agent** (LLM): Classifies intent + extracts location
-2. **Weather API Agent**: Geocodes location → fetches weather data
-3. **Summarizer Agent** (LLM): Converts structured data → natural language
-4. **Final Answer Agent**: Returns formatted response
+   - Uses **Gemini** to:
+     - Decide if the query is a weather question (`is_weather`)
+     - Extract the location name (`location`)
+3. **Weather API Agent**: Geocodes location → fetches weather data
+    - Uses **Open-Meteo**:
+     - Geocoding API → location name → latitude/longitude  
+     - Forecast API → current weather at those coordinates  
+   - Writes a human-readable summary into `weather_info`.
+5. **Summarizer Agent** (LLM): Converts structured data → natural language
+6. **Final Answer Agent**: Returns formatted response
+   - If `weather_info` exists → sets `answer` from it  
+   - Otherwise → sets a default “I can only answer simple weather questions” message.
 
 ## 🚀 Quick Start
 
